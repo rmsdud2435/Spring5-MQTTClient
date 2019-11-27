@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace" >
+<!-- 전체적으로 로그 쌓는 방식을 비동기로 만들고 싶을 땐 시스템 변수로 DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector 추가 -->
+	
+	<!-- 
+		Appender 태그 종류
+		ConsoleAppender : 콘솔에 출력
+		FileAppender : 파일에 출력
+		RandomAccessFileAppender : 파일에 출력을 하는데 Buffer를 통해서 성능을 향상시킨 태그
+		RollingFileAppneder : 조건에 따라 파일에 출력
+		RollingRandomAccessFileAppender : 조건에 따라 파일에 출력하는데  Buffer를 통해서 성능을 향상시킨 태그
+		JDBCAppender, Failover, Flume 등 다양한  태그 존재.
+		https://logging.apache.org/log4j/2.x/manual/appenders.html 참고
+		정확히 이해한 것은 아니지만 RandomeAccess가 붙은 태그는 안붙은 태그보다 메모리를 더 활용하지만 속도가 빠른 태그로 이해했음
+	 -->
+    <Appenders>
+    	<!-- target 속성 : SYSTEM_OUT, SYSTEM_ERR 중 선택. -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>

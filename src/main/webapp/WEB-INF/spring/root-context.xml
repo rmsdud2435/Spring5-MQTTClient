@@ -3,6 +3,35 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<bean id="mqttSubscribeConfig" class="com.spring5.sample.mqtt.config.MqttSubscribeConfig">		
+		<property name="protocol" value=""/> 					<!-- ws, wss, ssl 중 하나  -->
+		<property name="broker" value=""/> 			
+		<property name="port" value=""/> 						
+		<property name="clientId" value=""/> 
+		<property name="userName" value=""/>		
+		<property name="userPwd" value=""/>					
+		<property name="topic" value=""/>			
+		<property name="qos" value=""/>							<!-- 0,1,2 중 하나 -->
+		<property name="sessionTimeout" value=""/>				<!-- 초 단위 -->
+	</bean>
+	
+	<bean id="mqttPublishConfig" class="com.spring5.sample.mqtt.config.MqttPublishConfig">
+		<property name="protocol" value="" />					<!-- ws, wss, ssl 중 하나  -->
+		<property name="broker" value="" />
+		<property name="port" value="" />
+		<property name="clientId" value="" />
+		<property name="userName" value="" />
+		<property name="userPwd" value="" />
+		<property name="sessionTimeout" value="" />				<!-- 초 단위 -->
+	</bean>
+
+	<bean id="mqttPublish" class="com.spring5.sample.mqtt.client.MqttPublish"
+		init-method="init" destroy-method="disconnect">
+		<constructor-arg index="0" ref="mqttPublishConfig" />
+	</bean>
+	
+	<bean id="mqttSubscribe" class="com.spring5.sample.mqtt.client.MqttSubscribe" init-method="init" destroy-method="disconnect">
+		<constructor-arg index="0" ref="mqttSubscribeConfig" />
+	</bean>
+	
 </beans>

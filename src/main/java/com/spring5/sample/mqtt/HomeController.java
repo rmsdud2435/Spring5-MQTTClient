@@ -1,4 +1,4 @@
-package com.spring.sample.mqtt;
+package com.spring5.sample.mqtt;
 
 import java.text.DateFormat;
 import java.util.Date;
